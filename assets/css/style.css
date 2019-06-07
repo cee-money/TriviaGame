@@ -1,9 +1,30 @@
+body {
+    background: lightslategray;
+}
+
 .jumbotron {
     background-image: url("../images/rbg.PNG");
     height: 600px;
     margin-top: 30px;
 }
 
-.directions p {
-    font-size: 16px;
+#directions {
+    font-size: 14px;
+}
+
+#main-content {
+    padding: 20px;
+    background-color: ghostwhite;
+}
+
+#timer-case, #question {
+    padding: 30px;
+}
+
+.answer-box {
+    margin: 10px;
+}
+
+#answer1, #answer2, #answer3, #answer4 {
+    padding: 10px;
 }
