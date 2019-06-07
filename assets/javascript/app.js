@@ -3,8 +3,8 @@
 // Start button triggers:
 //     Jumbotron hides X
 //     Start button hides X
-//     time remaining to be displayed (30 secs)
-//     and a question with multiple choice answers (which the user clicks on)
+//     time remaining to be displayed (30 secs) X
+//     and a question with multiple choice answers (which the user clicks on) X
 
 // If an answer is chosen before timer is at 0:
 // correct
@@ -65,7 +65,7 @@ var questionsAnswers = {
         incorrect2: "Yale", 
         incorrect3: "NYU",
     },
-    question4: "In what year did RBG assume her current office as a Supreme Court justice",
+    question4: "In what year did RBG assume her current office as a Supreme Court justice?",
     answers4: {
         incorrect1: "1990", 
         incorrect2: "2002", 
@@ -99,10 +99,61 @@ function startGame () {
 // Function to display next question
 function nextQuestion () {
     startClock();
+    question3Func();
+
+};
+
+// Functions for each question to write to appropriate HTML and change location of correct answer
+function question1Func () {
+    $("#question").text(questionsAnswers.question1);
+    $("#answer1").text(questionsAnswers.answers1.correct);
+    $("#answer2").text(questionsAnswers.answers1.incorrect1);
+    $("#answer3").text(questionsAnswers.answers1.incorrect2);
+    $("#answer4").text(questionsAnswers.answers1.incorrect3);
+};
+function question2Func () {
+    $("#question").text(questionsAnswers.question2);
+    $("#answer1").text(questionsAnswers.answers2.incorrect1);
+    $("#answer2").text(questionsAnswers.answers2.incorrect2);
+    $("#answer3").text(questionsAnswers.answers2.correct);
+    $("#answer4").text(questionsAnswers.answers2.incorrect3);
+};
+function question3Func () {
+    $("#question").text(questionsAnswers.question3);
+    $("#answer1").text(questionsAnswers.answers3.incorrect1);
+    $("#answer2").text(questionsAnswers.answers3.correct);
+    $("#answer3").text(questionsAnswers.answers3.incorrect2);
+    $("#answer4").text(questionsAnswers.answers3.incorrect3);
+};
+function question4Func () {
+    $("#question").text(questionsAnswers.question4);
+    $("#answer1").text(questionsAnswers.answers4.incorrect1);
+    $("#answer2").text(questionsAnswers.answers4.incorrect2);
+    $("#answer3").text(questionsAnswers.answers4.correct);
+    $("#answer4").text(questionsAnswers.answers4.incorrect3);
+};
+function question5Func () {
+    $("#question").text(questionsAnswers.question5);
+    $("#answer1").text(questionsAnswers.answers5.correct);
+    $("#answer2").text(questionsAnswers.answers5.incorrect1);
+    $("#answer3").text(questionsAnswers.answers5.incorrect2);
+    $("#answer4").text(questionsAnswers.answers5.incorrect3);
+};
+function question6Func () {
+    $("#question").text(questionsAnswers.question6);
+    $("#answer1").text(questionsAnswers.answers6.incorrect1);
+    $("#answer2").text(questionsAnswers.answers6.incorrect2);
+    $("#answer3").text(questionsAnswers.answers6.correct);
+    $("#answer4").text(questionsAnswers.answers6.incorrect3);
 };
 
 // Function to display correct confirmation, incorrect notification and correct answer, and out of time message and correct answer
 function message () {
+
+};
+
+// Function 
+function gameOver() {
 
 };
 
