@@ -1,169 +1,144 @@
-// Start Button to begin the game X
-
-// Start button triggers:
-//     Jumbotron hides X
-//     Start button hides X
-//     time remaining to be displayed (30 secs) X
-//     and a question with multiple choice answers (which the user clicks on) X
-
-// If an answer is chosen before timer is at 0:
-// correct
-// show confirmation or victory message (timed display)
- correct++;
-//  move on to next question
-
-// incorrect
-// show incorrect confirmation or message and show correct answer (timed display)
- incorrect++;
-// move on to next question
-
-// If timer hits 0:
-//     show out of time message and show correct answer (timed display)
- unanswered++;
- //move on to next question
-
-// At the end of the game (no more questions)
-//     pause or reset and stop the timer
-//     show total correct answers
-//     show total incorrect answers
-//     show total unanswered
-//     ask if the play wants to start game over (reset)
-
-// // An array of trivia questions
-// var Questions = ["In what year was Ruth Bader Ginsburg born?", "What is RBG's birthplace?", "From which law school did Ginsburg receive her degree?", "In what year did RBG assume her current office as a Supreme Court justice?", "Under which president was Ginburgs appointed to SCOTUS?", "Which accessory does RBG match to her ruling on decision days?"];
-
-// // An array of corresponding answers
-// var Answers = ["1933", "1945", "1940", "1938", "Philadephia", "Detroit", "Brooklyn", "Queens", "Penn", "Columbia", "Yale", "NYU", "1990", "2002", "1993", "1987", "Bill Clinton", "George H.W. Bush", "George W. Bush", "Ronald Reagan", "Earrings", "Lipstick", "Collar", "Gavel"];
-
 var correct = 0;
 var incorrect = 0;
 var unanswered = 0;
-var time = 30;
+var time = 5;
 var intervalId;
 var clockRunning = false;
+var index = 0;
+var correctAnswer;
 
 
-var questionsAnswers = {
-    question1: "In what year was Ruth Bader Ginsburg born?",
-    answers1: {
-        correct: "1933",
-        incorrect1: "1945",
-        incorrect2: "1940",
-        incorrect3: "1938"
+var questionsAnswers = [
+    {   question: "In what year was Ruth Bader Ginsburg born?",
+        answers: [
+            {
+                answer: "1933",
+                correct: true
+            },
+            {
+                answer: "1945",
+                correct: false
+            },
+            {
+                answer: "1940",
+                correct: false
+            },
+            {
+                answer: "1938",
+                correct: false
+            }
+        ]
     },
-    question2: "What is RBG's birthplace?",
-    answers2: {
-        incorrect1: "Philadephia", 
-        incorrect2: "Detroit", 
-        correct: "Brooklyn", 
-        incorrect3: "Queens"
+    {   question: "What is RBG's birthplace?",
+        answers: [
+            {
+                answer: "Philadephia", 
+                correct: false
+            },
+            {
+                answer: "Detroit",
+                correct: false
+            },
+            {
+                answer:"Brooklyn",
+                correct: true
+            },
+            {
+                answer: "Queens",
+                correct: false
+            }
+        ]
     },
-    question3: "From which law school did Ginsburg receive her degree?",
-    answers3: {
-        incorrect1: "Penn", 
-        correct: "Columbia", 
-        incorrect2: "Yale", 
-        incorrect3: "NYU",
+    {   question: "From which law school did Ginsburg receive her degree?",
+        answers: [ 
+            {   
+                answer: "Penn", 
+                correct: false
+            },
+            {
+                answer: "Columbia", 
+                correct: true
+            },
+            {
+                answer: "Yale", 
+                correct: false
+            },
+            {
+                answer: "NYU",
+                correct: false
+            }
+        ]
     },
-    question4: "In what year did RBG assume her current office as a Supreme Court justice?",
-    answers4: {
-        incorrect1: "1990", 
-        incorrect2: "2002", 
-        correct: "1993", 
-        incorrect3: "1987",
+   {    question: "In what year did RBG assume her current office as a Supreme Court justice?",
+        answers: [
+            {
+                answer: "1990", 
+                correct: false
+            },
+            {
+                answer: "2002", 
+                correct: false
+            },
+            {
+                answer: "1993", 
+                correct: true
+            },
+            {
+                answer: "1987",
+                correct: false
+            }
+        ]
     },
-    question5: "Under which president was Ginburgs appointed to SCOTUS?",
-    answers5: {
-        correct: "Bill Clinton", 
-        incorrect1: "George H.W. Bush", 
-        incorrect2:"George W. Bush", 
-        incorrect3: "Ronald Reagan",
+    {   question: "Under which president was Ginburg appointed to SCOTUS?",
+        answers: [
+            {
+                answer: "Bill Clinton", 
+                correct: true
+            },
+            {
+                answer: "George H.W. Bush", 
+                correct: false
+            }, 
+            {
+                answer:"George W. Bush", 
+                correct: false
+            }, 
+            {
+                answer: "Ronald Reagan",
+                correct: false
+            }       
+        ]
     },
-    question6: "Which accessory does RBG match to her ruling on decision days?",
-    answers6: {
-        incorrect1: "Earrings", 
-        incorrect2: "Lipstick", 
-        correct: "Collar", 
-        incorrect3: "Gavel"
-    },
-}
+   {    question: "Which accessory does RBG match to her ruling on decision days?",
+        answers: [
+            {
+                answer: "Earrings", 
+                correct: false
+            },
+            {
+                answer: "Lipstick", 
+                correct: false
+            },
+            {
+                answer: "Collar", 
+                correct: true
+            },
+            {
+                answer: "Gloves", 
+                correct: false
+            },
+        ]
+    }
+];
+
+console.log(questionsAnswers.length);
 
 // Function to take place when game intially starts or is played again
-function startGame () {
+function startGame() {
     $("header").hide();
     $("#start-button").hide();
     $("#main-content").show();
     nextQuestion();
-};
-
-// Function to display next question
-function nextQuestion () {
-    startClock();
-    question3Func();
-
-};
-
-// Functions for each question to write to appropriate HTML and change location of correct answer
-function question1Func () {
-    $("#question").text(questionsAnswers.question1);
-    $("#answer1").text(questionsAnswers.answers1.correct);
-    $("#answer2").text(questionsAnswers.answers1.incorrect1);
-    $("#answer3").text(questionsAnswers.answers1.incorrect2);
-    $("#answer4").text(questionsAnswers.answers1.incorrect3);
-};
-function question2Func () {
-    $("#question").text(questionsAnswers.question2);
-    $("#answer1").text(questionsAnswers.answers2.incorrect1);
-    $("#answer2").text(questionsAnswers.answers2.incorrect2);
-    $("#answer3").text(questionsAnswers.answers2.correct);
-    $("#answer4").text(questionsAnswers.answers2.incorrect3);
-};
-function question3Func () {
-    $("#question").text(questionsAnswers.question3);
-    $("#answer1").text(questionsAnswers.answers3.incorrect1);
-    $("#answer2").text(questionsAnswers.answers3.correct);
-    $("#answer3").text(questionsAnswers.answers3.incorrect2);
-    $("#answer4").text(questionsAnswers.answers3.incorrect3);
-};
-function question4Func () {
-    $("#question").text(questionsAnswers.question4);
-    $("#answer1").text(questionsAnswers.answers4.incorrect1);
-    $("#answer2").text(questionsAnswers.answers4.incorrect2);
-    $("#answer3").text(questionsAnswers.answers4.correct);
-    $("#answer4").text(questionsAnswers.answers4.incorrect3);
-};
-function question5Func () {
-    $("#question").text(questionsAnswers.question5);
-    $("#answer1").text(questionsAnswers.answers5.correct);
-    $("#answer2").text(questionsAnswers.answers5.incorrect1);
-    $("#answer3").text(questionsAnswers.answers5.incorrect2);
-    $("#answer4").text(questionsAnswers.answers5.incorrect3);
-};
-function question6Func () {
-    $("#question").text(questionsAnswers.question6);
-    $("#answer1").text(questionsAnswers.answers6.incorrect1);
-    $("#answer2").text(questionsAnswers.answers6.incorrect2);
-    $("#answer3").text(questionsAnswers.answers6.correct);
-    $("#answer4").text(questionsAnswers.answers6.incorrect3);
-};
-
-// Function to display correct confirmation, incorrect notification and correct answer, and out of time message and correct answer
-function message () {
-
-};
-
-// Function 
-function gameOver() {
-
-};
-
-// Function to operate clock
-function countDown () {
-    time--;
-    $("#timer").text(time);
-    if (time == 0) {
-        stopClock();
-    }
 };
 
 // Starts running the countDown function on intervals of 1 second
@@ -180,13 +155,144 @@ function stopClock() {
     clockRunning = false;
 };
 
+// Function to operate clock
+function countDown() {
+    time--;
+    $("#timer").text(time);
+    if (time == 0) {
+        stopClock();
+        totalFailMessage();
+        unanswered++;
+    }
+};
+
+// Function to display next question
+function nextQuestion() {
+    time = 5;
+    $("#timer").text(time);
+    startClock();
+    qaDisplay();
+    index++;
+    $("#answer1").on("click", checkAnswer);
+    $("#answer2").on("click", checkAnswer);
+    $("#answer3").on("click", checkAnswer);
+    $("#answer4").on("click", checkAnswer);
+
+};
+
+
+// Function for each question and answer to write to appropriate HTML location
+function qaDisplay() { 
+    if (index < questionsAnswers.length) {
+        $(".timer-case").show();
+        $("#answer2").show();
+        $("#answer3").show();
+        $("#answer4").show();
+        $(".answer-box").show(); 
+        var currentQuestionAndAnswer = questionsAnswers[index];
+        $("#question").text(currentQuestionAndAnswer.question);
+        $("#answer1").text(currentQuestionAndAnswer.answers[0].answer);
+            if (currentQuestionAndAnswer.answers[0].correct) {
+                correctAnswer = currentQuestionAndAnswer.answers[0].answer;
+            }
+        $("#answer2").text(currentQuestionAndAnswer.answers[1].answer);
+            if (currentQuestionAndAnswer.answers[1].correct) {
+                correctAnswer = currentQuestionAndAnswer.answers[1].answer;
+            }
+        $("#answer3").text(currentQuestionAndAnswer.answers[2].answer);
+            if (currentQuestionAndAnswer.answers[2].correct) {
+                correctAnswer = currentQuestionAndAnswer.answers[2].answer;
+            }
+        $("#answer4").text(currentQuestionAndAnswer.answers[3].answer);
+            if (currentQuestionAndAnswer.answers[3].correct) {
+                correctAnswer = currentQuestionAndAnswer.answers[3].answer;
+            }
+    } else {
+        gameOver();
+    }
+}
+
+
+// Function to assess if answer chosen is correct or not and to display timed message accordingly
+function checkAnswer() {
+    stopClock();
+    var userGuess = $(this).text();
+    if (userGuess == correctAnswer) {
+        correct++;
+        successMessage();
+    } else {
+        incorrect++;
+        partialFailMessage();
+    }
+}
+
+// Functions to trigger the display of correct confirmation, incorrect message, and out of time message:
+function totalFailMessage() {
+    $(".timer-case").hide();
+    $("#answer2").hide();
+    $("#answer3").hide();
+    $("#answer4").hide();
+    $(".answer-box").hide();
+    $("#question").text("Time's up!");
+    $("#answer1").text("Correct answer was: " + correctAnswer);
+    setTimeout(nextQuestion, 3000);
+}
+function successMessage() {
+    $(".timer-case").hide();
+    $("#answer2").hide();
+    $("#answer3").hide();
+    $("#answer4").hide();
+    $(".answer-box").hide();
+    $("#question").text("That's correct!");
+    $("#answer1").text(correctAnswer);
+    setTimeout(nextQuestion, 3000);
+}
+function partialFailMessage() {
+    $(".timer-case").hide();
+    $("#answer2").hide();
+    $("#answer3").hide();
+    $("#answer4").hide();
+    $(".answer-box").hide();
+    $("#question").text("Nope, sorry!");
+    $("#answer1").text("Correct answer was: " + correctAnswer);
+    setTimeout(nextQuestion, 3000);
+}
+
+
+// Function to show counters and game over message
+function gameOver() {
+    stopClock();
+
+    $("#main-content").hide();
+    $("#game-over").show();
+    $("#wins").html("<h1>Total correct: " + correct + "</h1>");
+    $("#losses").html("<h1>Total incorrect: " + incorrect + "</h1>");
+    $("#none").html("<h1>Total not answered: " + unanswered + "</h1>");
+    $("#play-again").show();
+};
+$("#play-again-button").on("click", resetGame);
+
+// Function to reset the game if a player chooses to play again
+function resetGame () {
+    correct = 0;
+    incorrect = 0;
+    unanswered = 0;
+    startGame();
+}
 
 window.onload = function() {
     $("#main-content").hide();
+    $("#game-over").hide();
+    $("#play-again").hide();
 };
 
-// CLicking start  will trigger the startGame function
+// CLicking start will trigger the startGame function
 $("#start-button").on("click", startGame);
+
+
+
+
+
 
 
 

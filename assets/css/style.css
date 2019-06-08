@@ -12,16 +12,19 @@ body {
     font-size: 14px;
 }
 
-#main-content {
+#main-content, #game-over {
     padding: 20px;
     background-color: ghostwhite;
+    margin-top: 30px;
+    margin-bottom: 30px;
+
 }
 
 #timer-case, #question {
     padding: 30px;
 }
 
-.answer-box {
+.answer1-box, .answer-box {
     margin: 10px;
 }
 
