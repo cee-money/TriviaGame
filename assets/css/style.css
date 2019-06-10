@@ -4,6 +4,7 @@ body {
 
 .jumbotron {
     background-image: url("../images/rbg.PNG");
+    background-repeat: no-repeat;
     height: 600px;
     margin-top: 30px;
 }
@@ -30,4 +31,82 @@ body {
 
 #answer1, #answer2, #answer3, #answer4 {
     padding: 10px;
+}
+
+@media screen and (max-width: 980px) {
+    .jumbotron {
+        background-image: url("../images/rbg.PNG");
+        height: 600px;
+        margin-top: 30px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .jumbotron {
+        background-image: url("../images/rbgSM.JPEG");
+        height: 400px;
+        margin-top: 30px;
+        padding: 0;
+    }
+    #jumbotron {
+        padding: 0;
+    }
+    .text-holder {
+        position: absolute;
+        right: 60px;
+        top: 30px;
+        height: 400px;
+        width: 1000px;
+    }
+    .display-2 {
+        font-size: 70px;
+        margin-top: 20px;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .jumbotron {
+        background-image: url("../images/rbgSM.JPEG");
+        height: 400px;
+        margin-top: 30px;
+    }
+    #jumbotron {
+        height: 100%;
+    }
+    .text-holder {
+        position: absolute;
+        right: 15px;
+        top: 30px;
+        height: 400px;
+        width: 210px;
+    }
+    .display-2 {
+        font-size: 70px;
+    }
+}
+
+@media screen and (max-width: 545px) {
+    .jumbotron {
+        background-image: url("../images/rbgSM.JPEG");
+        height: 400px;
+        margin-top: 30px;
+    }
+    .text-holder {
+        position: absolute;
+        left: 12px;
+        top: 80px;
+        height: 210px;
+        width: 75px;
+        border: none;
+        padding: 5px;
+    }
+    .display-2 {
+        font-size: 20px;
+        font-weight: bold;
+        margin-top: 10px;
+    }
+    #directions {
+        margin-top: 10px;
+        font-size: 10px;
+    }
 }
