@@ -4,7 +4,6 @@ body {
 
 .jumbotron {
     background-image: url("../images/rbg.PNG");
-    background-repeat: no-repeat;
     height: 600px;
     margin-top: 30px;
 }
@@ -44,6 +43,7 @@ body {
 @media screen and (max-width: 768px) {
     .jumbotron {
         background-image: url("../images/rbgSM.JPEG");
+        background-repeat: no-repeat;
         height: 400px;
         margin-top: 30px;
         padding: 0;
@@ -67,6 +67,7 @@ body {
 @media screen and (max-width: 640px) {
     .jumbotron {
         background-image: url("../images/rbgSM.JPEG");
+        background-repeat: no-repeat;
         height: 400px;
         margin-top: 30px;
     }
@@ -88,6 +89,7 @@ body {
 @media screen and (max-width: 545px) {
     .jumbotron {
         background-image: url("../images/rbgSM.JPEG");
+        background-repeat: no-repeat;
         height: 400px;
         margin-top: 30px;
     }
