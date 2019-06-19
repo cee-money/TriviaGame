@@ -1,4 +1,5 @@
 # TriviaGame
+Deployed version: https://cee-money.github.io/TriviaGame/
 
 Watch the demo: https://youtu.be/xhmmiRmxQ8Q
 
